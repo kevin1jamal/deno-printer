@@ -1,12 +1,19 @@
 import { Drash } from "https://deno.land/x/drash@v1.4.1/mod.ts";
  
+import { Printer } from './printer.ts';
 export default class PrintResource extends Drash.Http.Resource {
  
   static paths = ["/print"];
  
   public GET() {
-    this.response.body = "GET request received!";
-    console.log(this.response)
+     console.log(this.response.request.url_query_params) ;
+     let impr = new Printer();
+    // impr.createPdf();
+    this.response.body = {
+        message :"get request okay",
+        params:this.response.request.url_query_params
+    };
+   // console.log(this.response)
     return this.response;
   }
  
